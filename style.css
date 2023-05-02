@@ -113,8 +113,29 @@ main {
   color: var(--purple);
 }
 
-@media screen and (max-width: 640px) {
-  
+@media screen and (max-width: 500px) {
+  .container {
+    padding-inline: 1.5rem;
+    border-radius: 1.6rem 1.6rem 8rem 1.6rem;
+  }
+
+  .form {
+    gap: 1.5rem;
+  }
+  .form button img {
+    width: 30px;
+  }
+
+  .display p {
+    font-size: 4rem;
+  }
+
+  .form-field input {
+    font-size: 1.75rem;
+    padding: 1.75rem 1rem;
+    width: 100%;
+    
+  }
 }
 
 @media screen and (min-width: 768px) {
