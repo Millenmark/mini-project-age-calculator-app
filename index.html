@@ -15,15 +15,18 @@
       <form class="form">
         <div class="form-field">
           <label for="day">day</label>
-          <input type="number" name="day" id="day" placeholder="DD">
+          <input type="number" name="day" id="day" placeholder="DD" class="day">
+          <span id="dayError"></span>
         </div>
         <div class="form-field">
           <label for="month">month</label>
-          <input type="number" name="month" id="month" placeholder="MM">
+          <input type="number" name="month" id="month" placeholder="MM" class="month">
+          <span id="monthError"></span>
         </div>
         <div class="form-field">
           <label for="year">year</label>
-          <input type="number" name="year" id="year" placeholder="YYYY">
+          <input type="number" name="year" id="year" placeholder="YYYY" class="year">
+          <span id="yearError"></span>
         </div>
         <button type="submit">
           <img src="./assets/images/icon-arrow.svg" alt="">
