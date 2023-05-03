@@ -1,9 +1,14 @@
-const form = document.querySelector(".form");
-const display = document.querySelector(".display");
+const form = document.querySelector(".form")
+const display = document.querySelector(".display")
 
 const dayInput = document.querySelector("#day")
 const monthInput = document.querySelector("#month")
 const yearInput = document.querySelector("#year")
+
+const dayError = document.getElementById("dayError")
+const monthError = document.getElementById("monthError")
+const yearError = document.getElementById("yearError")
+
 
 form.addEventListener("submit", function (event) {
   event.preventDefault(); // prevent default form submission behavior
@@ -17,34 +22,45 @@ form.addEventListener("submit", function (event) {
   // perform form validation
   let valid = true;
 
-  if (!yearInput.value || !monthInput.value || !dayInput.value) {
-    valid = false;
-    [yearInput, monthInput, dayInput].forEach(input => input.style.borderColor = "red")
-  } else {
-    [yearInput, monthInput, dayInput].forEach(input => input.style.borderColor = "")
-  }
+  // Define an array of input fields, their validation condition and error message
+  const inputs = [
+    { 
+      field: yearInput, 
+      isValid: birthDate < today, 
+      errorMessage: "This year is not valid", 
+      error: yearError 
+    },
+    { 
+      field: monthInput, 
+      isValid: monthInput.value <= 12, 
+      errorMessage: "This month is not valid", 
+      error: monthError 
+    },
+    { 
+      field: dayInput, 
+      isValid: birthDate.getDate() === parseInt(dayInput.value), 
+      errorMessage: "This day is not valid", 
+      error: dayError 
+    },
+  ];
 
-  // check if day is valid
-  if (birthDate.getDate() !== parseInt(document.querySelector("#day").value)) {
-    valid = false;
-    document.querySelector("#day").style.borderColor = "red";
-  } else {
-    document.querySelector("#day").style.borderColor = "";
-  }
+  // Loop through the array and check each input
+  inputs.forEach(input => {
+    if (!input.field.value) {
+      valid = false;
+      input.field.style.borderColor = "red";
+      input.error.innerText = "This field is required";
+    } else if (!input.isValid) {
+      valid = false;
+      input.field.style.borderColor = "red";
+      input.error.innerText = input.errorMessage;
+    } else {
+      input.field.style.borderColor = "";
+      input.error.innerText = "";
+    }
+  });
 
-  // check if month is valid
-  if ((birthDate.getMonth() + 1) !== parseInt(document.querySelector("#month").value)) {
-    valid = false;
-    document.querySelector("#month").style.borderColor = "red";
-  } else {
-    document.querySelector("#month").style.borderColor = "";
-  }
 
-  // check if year is in the past
-  if (birthDate >= today) {
-    valid = false;
-    document.querySelector("#year").style.borderColor = "red";
-  }
 
   // if form is not valid, don't calculate age
   if (!valid) {
@@ -68,5 +84,5 @@ form.addEventListener("submit", function (event) {
   // update the display with the calculated age
   display.children[0].children[0].textContent = age;
   display.children[1].children[0].textContent = months;
-  display.children[2].children[0].textContent = days;
+  display.children[2].children[0].textContent = Math.abs(days);
 });
