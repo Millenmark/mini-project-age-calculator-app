@@ -19,13 +19,9 @@ form.addEventListener("submit", function (event) {
 
   if (!yearInput.value || !monthInput.value || !dayInput.value) {
     valid = false;
-    yearInput.style.borderColor = "red";
-    monthInput.style.borderColor = "red";
-    dayInput.style.borderColor = "red";
+    [yearInput, monthInput, dayInput].forEach(input => input.style.borderColor = "red")
   } else {
-    yearInput.style.borderColor = "";
-    monthInput.style.borderColor = "";
-    dayInput.style.borderColor = "";
+    [yearInput, monthInput, dayInput].forEach(input => input.style.borderColor = "")
   }
 
   // check if day is valid
